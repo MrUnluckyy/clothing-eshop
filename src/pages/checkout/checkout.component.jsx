@@ -7,44 +7,52 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 
-import './checkout.styles.scss';
+import { 
+    CheckoutPageContainer,
+    CheckoutHeaderContainer,
+    CheckoutBlock,
+    TotalPriceContainer,
+    StripeButtonContainer,
+    WarningCreditCardText 
+} from './checkout.styles';
+
 
 const CheckoutPage = ({cartItems, total}) => (
-    <div className='checkout-page'>
-        <div className='checkout-header'>
-            <div className='header-block'>
+    <CheckoutPageContainer>
+        <CheckoutHeaderContainer>
+            <CheckoutBlock>
                 <span>Product</span>
-            </div>
-            <div className='header-block'>
+            </CheckoutBlock>
+            <CheckoutBlock>
                 <span>Description</span>
-            </div>
-            <div className='header-block'>
+            </CheckoutBlock>
+            <CheckoutBlock>
                 <span>Quantity</span>
-            </div>
-            <div className='header-block'>
+            </CheckoutBlock>
+            <CheckoutBlock>
                 <span>Price</span>
-            </div>
-            <div className='header-block'>
+            </CheckoutBlock>
+            <CheckoutBlock>
                 <span>Remove</span>
-            </div>
-        </div>
+            </CheckoutBlock>
+        </CheckoutHeaderContainer>
         {
             cartItems.map(cartItem =>
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />    
             )
         }
-        <div className='total'>
+        <TotalPriceContainer>
             <span>TOTAL: ${total}</span>
-        </div>
-        <div className='stripe-buy-button'>
+        </TotalPriceContainer>
+        <StripeButtonContainer>
             <StripeCheckoutButton price={total} />
-        </div>
-        <div className='test-warning'>
+        </StripeButtonContainer>
+        <WarningCreditCardText>
             * Please use the following test credit card for payments*
             <br />
             4242 4242 4242 4242 - Exp: 01/22 - CVV: 123
-        </div>
-    </div>
+        </WarningCreditCardText>
+    </CheckoutPageContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
